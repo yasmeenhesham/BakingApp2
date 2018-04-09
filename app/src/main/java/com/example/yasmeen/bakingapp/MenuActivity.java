@@ -1,11 +1,15 @@
 package com.example.yasmeen.bakingapp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
 import android.support.test.espresso.IdlingResource;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -24,6 +28,17 @@ public class MenuActivity extends AppCompatActivity implements ListItemClickList
         getSupportActionBar().setHomeButtonEnabled(false);
         getSupportActionBar().setTitle("Backing Time");
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        ConnectivityManager cm=(ConnectivityManager)getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo=cm.getActiveNetworkInfo();
+        if(networkInfo!=null&&networkInfo.isConnectedOrConnecting())
+        {
+
+        }
+        else
+        {
+            Toast.makeText(getApplicationContext(), R.string.no_internet, Toast.LENGTH_LONG).show();
+
+        }
 
         getIdlingResource();
 

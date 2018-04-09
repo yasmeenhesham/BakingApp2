@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Baking App</string>
+    <string name="no_internet">There is No Internet</string>
 </resources>
