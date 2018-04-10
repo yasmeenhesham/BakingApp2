@@ -19,9 +19,9 @@ public class BakingWidgetProvider extends AppWidgetProvider {
                                 int appWidgetId) {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_gridview);
         Intent openActivity = new Intent(context, RecipeDetailActivity.class);
-        openActivity.addCategory(Intent.ACTION_MAIN);
-        openActivity.addCategory(Intent.CATEGORY_LAUNCHER);
-        openActivity.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+       // openActivity.addCategory(Intent.ACTION_MAIN);
+       // openActivity.addCategory(Intent.CATEGORY_LAUNCHER);
+       // openActivity.addFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, openActivity, PendingIntent.FLAG_UPDATE_CURRENT);
         views.setPendingIntentTemplate(R.id.widget_grid_view, pendingIntent);
         Intent intent = new Intent(context, BakingWidgetService.class);
@@ -34,6 +34,12 @@ public class BakingWidgetProvider extends AppWidgetProvider {
         for (int appWidgetId : appWidgetIds) {
             updateAppWidget(context, appWidgetManager, appWidgetId);
         }
+    }
+
+    @Override
+    public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+
+        super.onUpdate(context, appWidgetManager, appWidgetIds);
     }
 
     @Override

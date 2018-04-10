@@ -21,6 +21,8 @@ public class RecipeDetailActivity extends AppCompatActivity implements ListItemC
             selectedReciepe = RecipeBundle.getParcelable("Recipe");
             reciepeName = selectedReciepe.getName();
             getSupportActionBar().setTitle(reciepeName);
+            getSupportActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             final DetailFragment detailFragment=new DetailFragment();
             detailFragment.setArguments(RecipeBundle);
             android.support.v4.app.FragmentManager manager= getSupportFragmentManager();

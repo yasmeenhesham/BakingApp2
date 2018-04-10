@@ -19,7 +19,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RecipeDetailActivity"></activity>
+        <activity android:name=".RecipeDetailActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MenuActivity"/>
+        </activity>
         <service android:name=".BakingWidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS"/>
         <service android:name=".UpdateBakingService"/>
