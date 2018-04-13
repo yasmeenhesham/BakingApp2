@@ -2,11 +2,11 @@ package com.example.yasmeen.bakingapp;
 
 import android.app.Activity;
 import android.app.Instrumentation;
+import android.os.SystemClock;
 import android.support.test.espresso.Espresso;
 import android.support.test.espresso.IdlingResource;
 import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
-import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.filters.LargeTest;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -22,6 +22,7 @@ import static android.support.test.espresso.intent.Intents.intended;
 import static android.support.test.espresso.intent.Intents.intending;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.isInternal;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static org.hamcrest.Matchers.not;
 
 
@@ -34,12 +35,14 @@ public class TestIntent {
     private IdlingResource mIdlingResource;
 
     @Rule
-    public IntentsTestRule<MenuActivity> mActivityTestRule = new IntentsTestRule<MenuActivity>(MenuActivity.class);
+    public IntentsTestRule<MenuActivity> mActivityTestRule = new IntentsTestRule<>(MenuActivity.class);
     @Before
     public void registerIdlingResource() {
         mIdlingResource = mActivityTestRule.getActivity().getIdlingResource();
         // To prove that the test fails, omit this call:
-        Espresso.registerIdlingResources(mIdlingResource); }
+        Espresso.registerIdlingResources(mIdlingResource);
+        SystemClock.sleep(5000);
+    }
     @Before
     public void stubAllExternalIntents() {
         // By default Espresso Intents does not stub any Intents. Stubbing needs to be setup before
@@ -47,7 +50,8 @@ public class TestIntent {
         intending(not(isInternal())).respondWith(new Instrumentation.ActivityResult(Activity.RESULT_OK, null)); }
     @Test
     public void checkIntent_RecipeDetailActivity() {
-        onView(ViewMatchers.withId(R.id.recycler)).perform(RecyclerViewActions.actionOnItemAtPosition(0,click()));
+
+        onView(withId(R.id.recycler)).perform(RecyclerViewActions.actionOnItemAtPosition(0,click()));
         intended(hasComponent(RecipeDetailActivity.class.getName())); }
     @After
     public void unregisterIdlingResource() {
