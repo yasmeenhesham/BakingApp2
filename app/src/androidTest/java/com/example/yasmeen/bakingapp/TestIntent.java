@@ -34,7 +34,7 @@ public class TestIntent {
     private IdlingResource mIdlingResource;
 
     @Rule
-    public IntentsTestRule<MenuActivity> mActivityTestRule = new IntentsTestRule<>(MenuActivity.class);
+    public IntentsTestRule<MenuActivity> mActivityTestRule = new IntentsTestRule<MenuActivity>(MenuActivity.class);
     @Before
     public void registerIdlingResource() {
         mIdlingResource = mActivityTestRule.getActivity().getIdlingResource();
@@ -47,7 +47,7 @@ public class TestIntent {
         intending(not(isInternal())).respondWith(new Instrumentation.ActivityResult(Activity.RESULT_OK, null)); }
     @Test
     public void checkIntent_RecipeDetailActivity() {
-        onView(ViewMatchers.withId(R.id.steps_recycler)).perform(RecyclerViewActions.actionOnItemAtPosition(0,click()));
+        onView(ViewMatchers.withId(R.id.recycler)).perform(RecyclerViewActions.actionOnItemAtPosition(0,click()));
         intended(hasComponent(RecipeDetailActivity.class.getName())); }
     @After
     public void unregisterIdlingResource() {
