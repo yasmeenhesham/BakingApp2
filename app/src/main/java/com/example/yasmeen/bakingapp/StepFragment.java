@@ -5,7 +5,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
@@ -65,7 +64,7 @@ public class StepFragment extends Fragment {
             selectedIndex=savedInstanceState.getInt("SELECTED_INDEX");
             recipeName = savedInstanceState.getString("Name");
             position = savedInstanceState.getLong("position");
-            playWhenReady =savedInstanceState.getBoolean("playWhenReady");
+            playWhenReady =savedInstanceState.getBoolean("whenready");
         }
         else {
             msteps =getArguments().getParcelableArrayList("SELECTED_STEPS");

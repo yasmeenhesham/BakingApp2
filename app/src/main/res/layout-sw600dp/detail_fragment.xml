@@ -10,11 +10,12 @@
     <ScrollView
         style="@android:style/Widget.Holo.ScrollView"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="@dimen/scrol_high"
         android:clipToPadding="false"
         android:fillViewport="false"
         android:background="@android:color/darker_gray"
         android:isScrollContainer="false"
+        android:id="@+id/scrollview"
         android:scrollIndicators="top|bottom"
         android:scrollbarAlwaysDrawVerticalTrack="false"
         android:scrollbarStyle="insideInset">

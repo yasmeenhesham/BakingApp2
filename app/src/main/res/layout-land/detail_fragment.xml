@@ -11,6 +11,7 @@
         style="@android:style/Widget.Holo.ScrollView"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:id="@+id/scrollview"
         android:clipToPadding="false"
         android:fillViewport="false"
         android:isScrollContainer="false"
@@ -25,7 +26,8 @@
             android:layout_height="200dp"
             android:padding="15dp"
             android:textColor="@android:color/black"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            />
     </ScrollView>
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"

@@ -31,18 +31,13 @@ public class MenuActivity extends AppCompatActivity implements ListItemClickList
         ConnectivityManager cm=(ConnectivityManager)getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo=cm.getActiveNetworkInfo();
         if(networkInfo!=null&&networkInfo.isConnectedOrConnecting())
-        {
-
-        }
+        { }
         else
         {
             Snackbar.make(findViewById(android.R.id.content), R.string.no_internet, Snackbar.LENGTH_LONG).show();
-
             //Toast.makeText(getApplicationContext(), R.string.no_internet, Toast.LENGTH_LONG).show();
-
         }
         getIdlingResource();
-
     }
 
 
