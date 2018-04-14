@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
@@ -40,7 +41,8 @@ public class StepFragment extends Fragment {
     private int selectedIndex;
     private String recipeName;
     private Recipe recipe ;
-
+    private long position;
+    private boolean playWhenReady;
     private SimpleExoPlayer mExoPlayer;
     private SimpleExoPlayerView mPlayerView;
     private BandwidthMeter bandwidthMeter;
@@ -62,6 +64,8 @@ public class StepFragment extends Fragment {
             msteps=savedInstanceState.getParcelableArrayList("SELECTED_STEPS");
             selectedIndex=savedInstanceState.getInt("SELECTED_INDEX");
             recipeName = savedInstanceState.getString("Name");
+            position = savedInstanceState.getLong("position");
+            playWhenReady =savedInstanceState.getBoolean("playWhenReady");
         }
         else {
             msteps =getArguments().getParcelableArrayList("SELECTED_STEPS");
@@ -127,6 +131,7 @@ public class StepFragment extends Fragment {
                     listItemClickListener.onListItemClick(msteps,selectedIndex-1,recipeName);
                 }
                 else {
+
                     Toast.makeText(getActivity(),"You already are in the First step of the recipe", Toast.LENGTH_SHORT).show();
 
                 }
@@ -161,7 +166,9 @@ public class StepFragment extends Fragment {
         String userAgent = Util.getUserAgent(getContext(), "Baking App");
         MediaSource mediaSource = new ExtractorMediaSource(mediaUri, new DefaultDataSourceFactory(getContext(), userAgent), new DefaultExtractorsFactory(), null, null);
         mExoPlayer.prepare(mediaSource);
-        mExoPlayer.setPlayWhenReady(true);
+        mExoPlayer.seekTo(position);
+        mExoPlayer.setPlayWhenReady(playWhenReady);
+
          }
     }
 
@@ -171,6 +178,8 @@ public class StepFragment extends Fragment {
         outState.putParcelableArrayList("SELECTED_STEPS",msteps);
         outState.putInt("SELECTED_INDEX",selectedIndex);
         outState.putString("Title",recipeName);
+        outState.putLong("position",position);
+        outState.putBoolean("whenready",playWhenReady);
     }
 
     @Override
@@ -206,8 +215,12 @@ public class StepFragment extends Fragment {
     public void onPause() {
         super.onPause();
         if (mExoPlayer!=null) {
+            position = mExoPlayer.getCurrentPosition();
+            playWhenReady = mExoPlayer.getPlayWhenReady();
             mExoPlayer.stop();
             mExoPlayer.release();
+
+
         }
     }
 }

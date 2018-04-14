@@ -39,14 +39,11 @@ public class TestIntent {
     @Before
     public void registerIdlingResource() {
         mIdlingResource = mActivityTestRule.getActivity().getIdlingResource();
-        // To prove that the test fails, omit this call:
         Espresso.registerIdlingResources(mIdlingResource);
         SystemClock.sleep(5000);
     }
     @Before
     public void stubAllExternalIntents() {
-        // By default Espresso Intents does not stub any Intents. Stubbing needs to be setup before
-        // every test run. In this case all external Intents will be blocked.
         intending(not(isInternal())).respondWith(new Instrumentation.ActivityResult(Activity.RESULT_OK, null)); }
     @Test
     public void checkIntent_RecipeDetailActivity() {
